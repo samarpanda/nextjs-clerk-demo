@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-clerk-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nextjs-clerk-demo
+  template:
+    metadata:
+      labels:
+        app: nextjs-clerk-demo
+    spec:
+      containers:
+        - name: nextjs-clerk-demo
+          image: samarpanda/nextjs-clerk-demo:0.0.1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: http-3000
+              containerPort: 3000
+
+          envFrom:
+            - secretRef:
+                name: nextjs-clerk-demo-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs-clerk-demo-svc
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: nextjs-clerk-demo
