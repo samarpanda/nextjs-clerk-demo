@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { expect, test, vi } from "vitest";
+
 import HomePage from "../src/app/page";
 
 vi.mock("next/navigation", () => ({
@@ -25,8 +26,3 @@ test("Home Page", async () => {
   render(await HomePage());
   expect(screen.getByText(`Nextjs Clerk Integration`)).toBeTruthy();
 });
-
-// test("redirects signed-in user", async () => {
-//   await HomePage();
-//   expect(redirect).toHaveBeenCalledWith("/dashboard");
-// });
