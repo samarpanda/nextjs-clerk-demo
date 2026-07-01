@@ -1,6 +1,6 @@
 FROM node:24.18.0-alpine AS base
 WORKDIR /app
-ENV NODE_ENV=production
+
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV CLERK_TELEMETRY_DISABLED=1
 RUN corepack enable
@@ -12,10 +12,11 @@ RUN \
   if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; \
   elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
-  else echo "No lock file found. Please add lock file. Failling the build & Exit." && exit 1; \
+  else echo "No lock file found. Please add lock file. Failing the build & Exit." && exit 1; \
   fi
 
 FROM base AS builder
+ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -46,9 +47,13 @@ ENV CLERK_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
+RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
+
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+USER nextjs
 
 EXPOSE 3000
 CMD ["node", "server.js"]
