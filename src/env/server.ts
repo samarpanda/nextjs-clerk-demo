@@ -6,8 +6,12 @@ const serverSchema = z.object({
   DB_WRITE_URL: z.url("Database WRITE URL must be a valid URL"),
   CLERK_SECRET_KEY: z.string().trim().min(1, "CLERK Secret key required"),
   CLERK_TELEMETRY_DISABLED: z.enum(["0", "1"]).default("1"),
-  NODE_ENV: z.enum(["dev", "production", "test"]).default("dev"),
-  APP_STAGE: z.enum(["dev", "production", "test"]).default("dev"),
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
+  APP_STAGE: z
+    .enum(["development", "production", "test"])
+    .default("development"),
   LOG_LEVEL: z.enum(["debug", "info", "error", "warn"]).default("debug"),
   LOG_TO_FILE: z
     .preprocess((v) => {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export function createEnv<T extends z.ZodTypeAny>(schema: T, values: unknown) {
+export function createEnv<T extends z.ZodType>(schema: T, values: unknown) {
   const parsed = schema.safeParse(values);
 
   if (!parsed.success) {
