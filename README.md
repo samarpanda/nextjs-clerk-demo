@@ -45,3 +45,11 @@
   "test:coverage": "vitest run --coverage"
 }
 ```
+
+## Validate client & server environments
+
+1. Client is build time environment variables. This gets embeded to the client build. Any change in these values would required a rebuild with the new values.
+
+1. client build is validated by a prebuild script that does this validation.
+
+1. Server environment variables is verified before starting the application. This is done by using the `instrumentation.ts` file. This triggers the validation at the runtime.
