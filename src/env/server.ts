@@ -28,3 +28,5 @@ const serverSchema = z.object({
 
 export const serverEnv = createEnv(serverSchema, process.env);
 export type ServerEnv = z.infer<typeof serverSchema>;
+
+export const { DB_READ_URL, DB_WRITE_URL, CLERK_SECRET_KEY, PORT } = serverEnv;

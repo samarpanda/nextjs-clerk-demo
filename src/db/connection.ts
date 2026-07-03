@@ -1,9 +1,11 @@
-import pkg from "pg";
-const { Pool } = pkg;
 import { drizzle } from "drizzle-orm/node-postgres";
-import * as schema from "./schema";
-import { logger } from "@/logger";
+import pkg from "pg";
 
+import { DB_READ_URL, DB_WRITE_URL } from "@/env/server";
+import { logger } from "@/logger";
+import * as schema from "./schema";
+
+const { Pool } = pkg;
 const PG_APP_NAME = "NEXTJS_CLERK_DEMO";
 const PG_TIMEOUT_MS = 5000;
 const DB_WRITE_MAX_POOL_LIMIT = 5;
@@ -20,7 +22,7 @@ const globalForDb = globalThis as unknown as DbGlobal;
 
 function createWritePool() {
   const poolWrite = new Pool({
-    connectionString: process.env.DB_WRITE_URL,
+    connectionString: DB_WRITE_URL,
     application_name: `${PG_APP_NAME}:write`,
     statement_timeout: PG_TIMEOUT_MS,
     max: DB_WRITE_MAX_POOL_LIMIT,
@@ -40,7 +42,7 @@ function createWritePool() {
 
 function createReadPool() {
   const poolRead = new Pool({
-    connectionString: process.env.DB_READ_URL,
+    connectionString: DB_READ_URL,
     application_name: `${PG_APP_NAME}:read`,
     statement_timeout: PG_TIMEOUT_MS,
     max: DB_READ_MAX_POOL_LIMIT,

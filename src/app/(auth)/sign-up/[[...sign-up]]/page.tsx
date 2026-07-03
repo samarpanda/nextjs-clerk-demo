@@ -1,13 +1,18 @@
 import { SignUp } from "@clerk/nextjs";
+import {
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+  NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL,
+} from "@/env/client";
 
 const SignUpPage = () => {
   return (
     <div className="flex min-h-screen w-full items-center justify-center">
       <SignUp
-        path="/sign-up"
+        path={NEXT_PUBLIC_CLERK_SIGN_UP_URL}
         routing="path"
-        signInUrl="/sign-in"
-        forceRedirectUrl="/new-user"
+        signInUrl={NEXT_PUBLIC_CLERK_SIGN_IN_URL}
+        forceRedirectUrl={NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL}
       />
     </div>
   );

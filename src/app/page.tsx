@@ -1,11 +1,16 @@
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import {
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+  NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
+} from "@/env/client";
 
 export default async function Home() {
   const { userId } = await auth();
   if (userId) {
-    redirect("/dashboard");
+    redirect(NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL);
   }
 
   return (
@@ -16,7 +21,7 @@ export default async function Home() {
         <br />
         <br />
         <p className="text-2xl text-white/60 mb-4">Existing users Login</p>
-        <Link href="/sign-in">
+        <Link href={NEXT_PUBLIC_CLERK_SIGN_IN_URL}>
           <button className="bg-blue-600 px-4 py-4 rounded-lg text-xl">
             Login
           </button>
@@ -24,7 +29,7 @@ export default async function Home() {
         <br />
         <br />
         <p className="text-2xl text-white/60 mb-4">New users SignUp</p>
-        <Link href="/sign-up">
+        <Link href={NEXT_PUBLIC_CLERK_SIGN_UP_URL}>
           <button className="bg-blue-600 px-4 py-4 rounded-lg text-xl">
             SignUp
           </button>

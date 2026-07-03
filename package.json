@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "tsx src/env/client.ts",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
@@ -50,7 +49,6 @@
     "drizzle-kit": "^0.31.10",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4",
-    "tsx": "^4.22.5",
     "typescript": "^5",
     "vitest": "^4.1.9"
   },

@@ -1,22 +1,23 @@
 import { z } from "zod";
 
-export function createEnv<T extends z.ZodType>(schema: T, values: unknown) {
-  const parsed = schema.safeParse(values);
+export function createEnv<T extends z.ZodType>(
+  schema: T,
+  values: unknown,
+): z.output<T> {
+  const result = schema.safeParse(values);
 
-  if (!parsed.success) {
-    const { fieldErrors, formErrors } = z.flattenError(parsed.error);
-    throw new Error(
-      [
-        "Invalid environment variables",
-        ...formErrors,
-        ...Object.entries(fieldErrors).flatMap(([name, messages]) =>
-          Array.isArray(messages)
-            ? messages.map((message) => `${name}: ${message}`)
-            : [],
-        ),
-      ].join("\n"),
-    );
+  if (result.success) {
+    return result.data;
   }
 
-  return parsed.data;
+  const details = result.error.issues.map((issue) => {
+    const path =
+      issue.path.length > 0 ? issue.path.map(String).join(".") : "<root>";
+
+    return `- ${path}: ${issue.message}`;
+  });
+
+  throw new Error(["Invalid environment variables:", ...details].join("\n"), {
+    cause: result.error,
+  });
 }

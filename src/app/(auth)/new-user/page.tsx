@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 import { type NewUser, users } from "@/db/schema";
+import { NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL } from "@/env/client";
 import { dbWrite } from "@/lib/db";
 import { logger } from "@/logger";
 
@@ -35,7 +36,7 @@ async function createNewUser() {
     logger.info("Successfully created the new user", newUser);
   }
   logger.info("Navigating to /dashboard", user);
-  redirect("/dashboard");
+  redirect(NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL);
 }
 
 const NewUser = async () => {

@@ -1,6 +1,14 @@
 #!/bin/sh
+set -e
 
-export LC_ALL=en_US.UTF-8
+DHUB=""
+TAG=latest
+SERVICE=ncd
+PORT=3000
+CNAME=local-twd-${SERVICE}
+IMAGE="${DHUB}${CNAME}:${TAG}"
 
-#docker build --build-arg NEXT_PUBLIC_APP_URL=https://nextpublicappurl.com -t my-next-app:0.0.1 .
-docker run --rm -p 3000:3000 --env-file .env.local nextjs-clerk-demo:0.0.1
+
+echo "starting container ${CNAME}"
+docker run -d --name $CNAME --env-file .env.local -p $PORT:3000 $IMAGE
+#docker run --rm --name $CNAME --env-file .env.local -p $PORT:3000 $IMAGE
