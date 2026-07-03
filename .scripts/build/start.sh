@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+
+set -Eeuo pipefail
 
 DHUB="${DHUB:-}"
 TAG="${TAG:-latest}"
