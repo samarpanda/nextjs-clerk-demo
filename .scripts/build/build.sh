@@ -35,18 +35,6 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   esac
 done < "$ENV_FILE"
 
-echo "Removing existing container: $CNAME"
-
-if docker container inspect "$CNAME" >/dev/null 2>&1; then
-  docker stop --time=20 "$CNAME"
-  docker rm "$CNAME"
-fi
-
-if docker image inspect "$IMAGE" >/dev/null 2>&1; then
-  echo "Removing existing image: $IMAGE"
-  docker image rm -f "$IMAGE"
-fi
-
 echo "Building image: $IMAGE"
 
 docker build \

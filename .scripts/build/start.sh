@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
-DHUB=""
-TAG=latest
-SERVICE=ncd
-PORT=3000
+DHUB="${DHUB:-}"
+TAG="${TAG:-latest}"
+SERVICE="${SERVICE:-ncd}"
+PORT="${PORT:-3000}"
 CNAME=local-twd-${SERVICE}
 IMAGE="${DHUB}${CNAME}:${TAG}"
 
