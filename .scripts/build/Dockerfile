@@ -17,6 +17,7 @@ RUN \
 
 FROM base AS builder
 ENV NODE_ENV=production
+ENV APP_STAGE=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -42,6 +43,7 @@ FROM node:24.18.0-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV APP_STAGE=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV CLERK_TELEMETRY_DISABLED=1
 ENV PORT=3000
