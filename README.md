@@ -46,6 +46,10 @@
 }
 ```
 
+4. I am not using any SWC plugins. So, i am replacing `@vitejs/plugin-react-swc` to `@vitejs/plugin-react`. This is recommended because it performs better with Rolldown.
+
+5. Found the test was broken due to test environment not getting loaded and tsconfig not included in vite.config.ts. So, fixed it now. The test is working fine.
+
 ## Validate client & server environments
 
 1. Client is build time environment variables. This gets embeded to the client build. Any change in these values would required a rebuild with the new values.
