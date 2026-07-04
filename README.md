@@ -12,13 +12,13 @@
 
 1. Install required dependencies
 
-`pnpm i -D @testing-library/jest-dom@6.9.1 @testing-library/react@16.3.2 @vitejs/plugin-react-swc@4.3.1 jsdom@29.1.1 vitest@4.1.9`
+`pnpm i -D @testing-library/jest-dom@6.9.1 @testing-library/react@16.3.2 @vitejs/plugin-react@6.0.3 jsdom@29.1.1 vitest@4.1.9`
 
 ```json
 {
   "@testing-library/jest-dom": "^6.9.1",
   "@testing-library/react": "^16.3.2",
-  "@vitejs/plugin-react-swc": "^4.3.1",
+  "@vitejs/plugin-react": "^6.0.3",
   "jsdom": "^29.1.1",
   "vitest": "^4.1.9"
 }
@@ -46,9 +46,7 @@
 }
 ```
 
-4. I am not using any SWC plugins. So, i am replacing `@vitejs/plugin-react-swc` to `@vitejs/plugin-react`. This is recommended because it performs better with Rolldown.
-
-5. Found the test was broken due to test environment not getting loaded and tsconfig not included in vite.config.ts. So, fixed it now. The test is working fine.
+4. Found the test was broken due to test environment not getting loaded and tsconfig not included in vite.config.ts. So, fixed it now. The test is working fine.
 
 ## Validate client & server environments
 
