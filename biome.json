@@ -14,7 +14,8 @@
       "!dist",
       "!build",
       "!.logs",
-      "!.drizzle"
+      "!.drizzle",
+      "!drizzle.config.ts"
     ]
   },
   "formatter": {

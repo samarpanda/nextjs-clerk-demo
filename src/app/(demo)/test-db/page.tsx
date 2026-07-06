@@ -1,5 +1,5 @@
-import { dbWrite } from "@/lib/db";
 import { type NewUser, users } from "@/db/schema";
+import { dbWrite } from "@/lib/db";
 import { logger } from "@/logger";
 
 async function insertNewUser(uniqueId: string) {

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import type { z } from "zod";
 
 export function createEnv<T extends z.ZodType>(
   schema: T,

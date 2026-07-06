@@ -39,9 +39,9 @@ async function createNewUser() {
   redirect(NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL);
 }
 
-const NewUser = async () => {
+const CreateNewUser = async () => {
   await createNewUser();
   return <div>...loading</div>;
 };
 
-export default NewUser;
+export default CreateNewUser;

@@ -2,9 +2,9 @@ import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
+  NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
   NEXT_PUBLIC_CLERK_SIGN_IN_URL,
   NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-  NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
 } from "@/env/client";
 
 export default async function Home() {
@@ -22,7 +22,10 @@ export default async function Home() {
         <br />
         <p className="text-2xl text-white/60 mb-4">Existing users Login</p>
         <Link href={NEXT_PUBLIC_CLERK_SIGN_IN_URL}>
-          <button className="bg-blue-600 px-4 py-4 rounded-lg text-xl">
+          <button
+            type="button"
+            className="bg-blue-600 px-4 py-4 rounded-lg text-xl"
+          >
             Login
           </button>
         </Link>
@@ -30,7 +33,10 @@ export default async function Home() {
         <br />
         <p className="text-2xl text-white/60 mb-4">New users SignUp</p>
         <Link href={NEXT_PUBLIC_CLERK_SIGN_UP_URL}>
-          <button className="bg-blue-600 px-4 py-4 rounded-lg text-xl">
+          <button
+            type="button"
+            className="bg-blue-600 px-4 py-4 rounded-lg text-xl"
+          >
             SignUp
           </button>
         </Link>
